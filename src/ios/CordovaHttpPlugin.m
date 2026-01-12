@@ -150,7 +150,7 @@
 
                 if (!leafCertificate) {
                     // If there is no leaf certificate delivered by the request, reject the connection
-                    return NSURLSessionAuthChallengeCancelAuthenticationChallenge;
+                    return NSURLSessionAuthChallengeRejectProtectionSpace;
                 }
 
                 AFSecurityPolicy *securityPolicyWithCertificatePinning = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
@@ -160,7 +160,7 @@
               
                 // Check serverTrust with PinningModeCertificateSecurityPolicy if domain matched
                 if (![securityPolicyWithCertificatePinning evaluateServerTrust:serverTrust forDomain:serverDomain]) {
-                    return NSURLSessionAuthChallengeCancelAuthenticationChallenge;
+                    return NSURLSessionAuthChallengeRejectProtectionSpace;
                 }
                 
             } else {
